@@ -37,7 +37,7 @@ public class loginQuery {
             login.setApiKey(apiKey);
             login.setApiKeyTime(new Timestamp(System.currentTimeMillis()));
             repository.save(login);
-            loginHistoryRepository.save(new LoginHistory(login.getId(),new Timestamp(System.currentTimeMillis())));
+            loginHistoryRepository.save(new LoginHistory(login.getId(),new Timestamp(System.currentTimeMillis()-25200000)));
         }
         return apiKey;
     }

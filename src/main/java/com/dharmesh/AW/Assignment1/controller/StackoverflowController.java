@@ -37,7 +37,7 @@ public class StackoverflowController extends APIKeyCheckController {
                         HttpServletRequest request, HttpServletResponse response){
         long time = System.currentTimeMillis();
         UserPostsCount userPostsCount = userPostsCountRepository.findByUserNameAndPostedDate(userName, new Date(time));
-        if(userName==null){
+        if(userPostsCount==null){
             userPostsCountRepository.save(new UserPostsCount(userName,1,new Date(time)));
         }
         else{

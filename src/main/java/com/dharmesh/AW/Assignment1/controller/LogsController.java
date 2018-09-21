@@ -71,12 +71,17 @@ public class LogsController extends APIKeyCheckController{
 
     @RequestMapping(value="/logQuestionHits", method = RequestMethod.POST)
     public String logQuestionhits(@RequestHeader(value = "userName") String userName,
-                                      @RequestHeader(value = "count") Integer count,
                                       @RequestHeader(value = "questionId") Integer questionId){
-        QuestionHits hits = questionHitsRepository.findByQuestionId(questionId);
-        hits.setQuestionHits(hits.getQuestionHits()+1);
-        questionHitsRepository.save(hits);
-        return "logged";
+        QuestionHits hits = questionHitsRepository.findByUsernameAndQuestionId(userName,questionId);
+        if(hits==null){
+            questionHitsRepository.save(new QuestionHits(userName,questionId,1));
+            return "logged";
+        }
+        else {
+            hits.setQuestionHits(hits.getQuestionHits()+1);
+            questionHitsRepository.save(hits);
+            return "logged";
+        }
     }
 
     @RequestMapping(value="/getQuestionHits", method = RequestMethod.GET)

@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface QuestionHitsRepository extends JpaRepository<QuestionHits, Integer> {
-    QuestionHits findByQuestionId(Integer questionId);
+    QuestionHits findByUsernameAndQuestionId(String userName, Integer questionId);
     List<QuestionHits> findAllByUsernameOrderByQuestionId(String userName);
 }
